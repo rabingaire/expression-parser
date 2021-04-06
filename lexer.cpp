@@ -16,6 +16,13 @@ namespace ExpressionParser
             }
         }
 
+#ifdef DEBUG_LEXER
+        for (Token *token : tokens)
+        {
+            token->debug_print_token();
+        }
+#endif
+
         return tokens;
     }
 }

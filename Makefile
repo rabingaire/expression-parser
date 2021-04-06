@@ -2,7 +2,7 @@ TARGET = ex
 
 CC = clang++
 
-CFLAGS = -Wall -Werror -Wunused-value -std=c++17 -g
+CFLAGS = -Wall -Werror -Wunused-value -std=c++17 -g -DDEBUG_LEXER
 
 HEADERS=$(shell find . -type f -name "*.hpp")
 SOURCE=$(shell find . -type f -name "*.cpp")

@@ -1,14 +1,9 @@
-#include "lexer.hpp"
+#include "parser.hpp"
 
 int main()
 {
   const char *input = "1 + 2*(4+5)";
-  ExpressionParser::Lexer *lex = new ExpressionParser::Lexer{input};
-
-  for (ExpressionParser::Token *token : lex->tokens())
-  {
-    token->debug_print_token();
-  }
-
+  ExpressionParser::Parser *parser = new ExpressionParser::Parser{input};
+  std::cout << parser->parse_expression() << std::endl;
   return 0;
 }
