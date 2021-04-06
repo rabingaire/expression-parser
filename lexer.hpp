@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <ctype.h>
 #include <iostream>
+#include <vector> // NOTE: implement your own vector
 
 namespace ExpressionParser
 {
@@ -143,9 +144,70 @@ namespace ExpressionParser
             assert(m_input);
         }
 
-        Token *next_token();
+        std::vector<Token *> tokens();
 
     private:
+        Token *next_token()
+        {
+            skip_whitespace();
+
+            Token *token{nullptr};
+
+            switch (current_char())
+            {
+            case '+':
+            {
+                token = new Token{Token::Type::PLUS, current_char()};
+                break;
+            }
+            case '-':
+            {
+                token = new Token{Token::Type::SUBTRACT, current_char()};
+                break;
+            }
+            case '/':
+            {
+                token = new Token{Token::Type::DIVIDE, current_char()};
+                break;
+            }
+            case '*':
+            {
+                token = new Token{Token::Type::MULT, current_char()};
+                break;
+            }
+            case '(':
+            {
+                token = new Token{Token::Type::LPAREN, current_char()};
+                break;
+            }
+            case ')':
+            {
+                token = new Token{Token::Type::RPAREN, current_char()};
+                break;
+            }
+            case 0:
+            {
+                token = new Token{Token::Type::EOL};
+                break;
+            }
+            default:
+            {
+                if (isdigit(current_char()))
+                {
+                    size_t number = read_number();
+                    token = new Token{
+                        Token::Type::NUMBER, number};
+                    break;
+                }
+                token = new Token{Token::Type::INVALID};
+            }
+            }
+
+            advance();
+
+            return token;
+        }
+
         void skip_whitespace()
         {
             while (current_char() == ' ' || current_char() == '\t')
