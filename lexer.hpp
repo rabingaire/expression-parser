@@ -51,6 +51,28 @@ namespace ExpressionParser
         {
         }
 
+        static Token *invalid() { return new Token{Token::Type::INVALID}; }
+
+        bool is_operator()
+        {
+            return this->m_type == Type::PLUS || this->m_type == Type::SUBTRACT || this->m_type == Type::MULT || this->m_type == Type::DIVIDE || this->m_type == Type::LPAREN || this->m_type == Type::RPAREN;
+        }
+
+        bool is_number()
+        {
+            return this->m_type == Type::NUMBER;
+        }
+
+        bool is_valid()
+        {
+            return this->m_type != Type::INVALID;
+        }
+
+        bool is_eol()
+        {
+            return this->m_type == Type::EOL;
+        }
+
         Type get_type()
         {
             return this->m_type;
@@ -199,7 +221,7 @@ namespace ExpressionParser
                         Token::Type::NUMBER, number};
                     break;
                 }
-                token = new Token{Token::Type::INVALID};
+                token = new Token{Token::Type::INVALID, current_char()};
             }
             }
 
