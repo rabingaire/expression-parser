@@ -68,9 +68,11 @@ namespace ExpressionParser
 
         while (!literal_queue.empty())
         {
+
 #ifdef DEBUG_PARSER
             literal_queue.front()->debug_print_token();
 #endif
+
             if (literal_queue.front()->is_number())
             {
                 evaluation_stack.push(literal_queue.front()->get_number_literal());
@@ -78,10 +80,19 @@ namespace ExpressionParser
 
             if (literal_queue.front()->is_operator())
             {
-                int64_t right = evaluation_stack.top();
-                evaluation_stack.pop();
-                int64_t left = evaluation_stack.top();
-                evaluation_stack.pop();
+                int64_t right{0}, left{0};
+
+                if (!evaluation_stack.empty())
+                {
+                    right = evaluation_stack.top();
+                    evaluation_stack.pop();
+                }
+
+                if (!evaluation_stack.empty())
+                {
+                    left = evaluation_stack.top();
+                    evaluation_stack.pop();
+                }
 
                 switch (literal_queue.front()->get_type())
                 {
