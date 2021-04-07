@@ -4,7 +4,7 @@
 #include <assert.h>
 #include <ctype.h>
 #include <iostream>
-#include <vector> // NOTE: implement your own vector
+#include <vector>
 
 namespace ExpressionParser
 {
