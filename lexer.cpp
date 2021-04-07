@@ -17,10 +17,12 @@ namespace ExpressionParser
         }
 
 #ifdef DEBUG_LEXER
+        std::cout << "### DEBUG_LEXER:" << std::endl;
         for (Token *token : tokens)
         {
             token->debug_print_token();
         }
+        std::cout << std::endl;
 #endif
 
         return tokens;

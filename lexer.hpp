@@ -13,10 +13,10 @@ namespace ExpressionParser
         enum struct Type
         {
             NUMBER,
-            PLUS,
             SUBTRACT,
-            DIVIDE,
+            PLUS,
             MULT,
+            DIVIDE,
             LPAREN,
             RPAREN,
             EOL,
@@ -55,7 +55,7 @@ namespace ExpressionParser
 
         bool is_operator()
         {
-            return this->m_type == Type::PLUS || this->m_type == Type::SUBTRACT || this->m_type == Type::MULT || this->m_type == Type::DIVIDE || this->m_type == Type::LPAREN || this->m_type == Type::RPAREN;
+            return this->m_type == Type::PLUS || this->m_type == Type::SUBTRACT || this->m_type == Type::MULT || this->m_type == Type::DIVIDE;
         }
 
         bool is_number()
@@ -73,9 +73,34 @@ namespace ExpressionParser
             return this->m_type == Type::EOL;
         }
 
+        bool is_open_paren()
+        {
+            return this->m_type == Type::LPAREN;
+        }
+
+        bool is_close_paren()
+        {
+            return this->m_type == Type::RPAREN;
+        }
+
         Type get_type()
         {
             return this->m_type;
+        }
+
+        const char *get_string_literal()
+        {
+            return this->m_string_literal;
+        }
+
+        const char get_char_literal()
+        {
+            return this->m_char_literal;
+        }
+
+        const char get_number_literal()
+        {
+            return this->m_number_literal;
         }
 
         void debug_print_token()
