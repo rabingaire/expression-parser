@@ -3,12 +3,13 @@
 #include "lexer.hpp"
 
 #include <assert.h>
-#include <vector> // NOTE: implement your own vector
+#include <vector>
 #include <ctype.h>
 #include <stack>
 #include <queue>
 #include <iostream>
 #include <stdexcept>
+#include <cstdint>
 
 namespace ExpressionParser
 {
@@ -32,7 +33,7 @@ namespace ExpressionParser
             return get_precedence(cur_token) > get_precedence(past_token);
         }
 
-        size_t parse_expression();
+        int64_t parse_expression();
 
     private:
         static Precedence get_precedence(Token *token)

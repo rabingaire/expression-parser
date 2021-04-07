@@ -2,7 +2,7 @@
 
 namespace ExpressionParser
 {
-    size_t Parser::parse_expression()
+    int64_t Parser::parse_expression()
     {
         // shunting yard algorithm
         std::queue<Token *> literal_queue;
@@ -60,7 +60,7 @@ namespace ExpressionParser
         }
 
         // evaluate expression
-        std::stack<size_t> evaluation_stack;
+        std::stack<int64_t> evaluation_stack;
 
 #ifdef DEBUG_PARSER
         std::cout << "### DEBUG_PARSER:" << std::endl;
@@ -78,9 +78,9 @@ namespace ExpressionParser
 
             if (literal_queue.front()->is_operator())
             {
-                size_t right = evaluation_stack.top();
+                int64_t right = evaluation_stack.top();
                 evaluation_stack.pop();
-                size_t left = evaluation_stack.top();
+                int64_t left = evaluation_stack.top();
                 evaluation_stack.pop();
 
                 switch (literal_queue.front()->get_type())
