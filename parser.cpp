@@ -60,6 +60,7 @@ namespace ExpressionParser
         }
 
         // evaluate expression
+        // if this was a real language parser we would generate AST not evaluate expression
         std::stack<int64_t> evaluation_stack;
 
 #ifdef DEBUG_PARSER
