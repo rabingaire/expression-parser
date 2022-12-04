@@ -11,10 +11,14 @@ OBJS=$(SOURCE:.cpp=.o)
 %.o: %.cpp
 	@$(CC) $(CFLAGS) -o $@ -c $<
 
+all: build clean-objs
+
 build: $(OBJS) $(HEADERS)
 	@$(CC) -o $(TARGET) $(OBJS)
 
-.PHONY: clean
-clean:
+clean-objs:
 	@rm -f $(OBJS)
+
+.PHONY: clean
+clean: clean-objs
 	@rm -f ./$(TARGET)
